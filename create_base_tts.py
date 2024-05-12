@@ -1,6 +1,15 @@
 import os
+import sys
 import torch
 from openvoice.api import BaseSpeakerTTS
+
+
+outFileName = "base_tts.wav"
+if __name__ == "__main__":
+    arguments = sys.argv
+    print(arguments)
+    if len(arguments) >= 2:
+        outFileName = arguments[1]
 
 ckpt_base = 'checkpoints/base_speakers/EN'
 ckpt_converter = 'checkpoints/converter'
@@ -14,6 +23,6 @@ os.makedirs(output_dir, exist_ok=True)
 
 # Run the base speaker tts
 text = "Hi my name is kim young jun"
-src_path = f'{output_dir}/base_tts.wav'
+src_path = f'{output_dir}/' + outFileName
 base_speaker_tts.tts(text, src_path, speaker='default', language='English', speed=1.0)
 
